@@ -1,0 +1,69 @@
+{
+  "name": "vscode-delta",
+  "displayName": "Delta (Δ) Language Support",
+  "description": "Syntax highlighting, IntelliSense, and LSP support for the Delta code transformation language",
+  "version": "0.1.0",
+  "publisher": "delta-lang",
+  "engines": { "vscode": "^1.85.0" },
+  "categories": ["Programming Languages", "Linters", "Formatters"],
+  "keywords": ["delta", "code-transform", "refactor", "migration"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Delta-Lang-Dev/vscode-delta"
+  },
+  "icon": "assets/icon.png",
+  "activationEvents": ["onLanguage:delta"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "delta",
+        "aliases": ["Delta", "delta"],
+        "extensions": [".delta"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "delta",
+        "scopeName": "source.delta",
+        "path": "./syntaxes/delta.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "delta",
+        "path": "./snippets/delta.code-snippets"
+      }
+    ],
+    "configuration": {
+      "title": "Delta",
+      "properties": {
+        "delta.lsp.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable the Delta Language Server for diagnostics and hover docs"
+        },
+        "delta.lsp.path": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the delta CLI binary (leave empty to use PATH)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build":   "tsc -p tsconfig.json",
+    "watch":   "tsc -p tsconfig.json --watch",
+    "package": "npx @vscode/vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}
