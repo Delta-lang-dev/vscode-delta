@@ -1,0 +1,84 @@
+{
+  "Patch Function": {
+    "prefix": "patch",
+    "body": [
+      "patch \"${1:src/file.ts}\" in ${2:TypeScript} {",
+      "  find fn ${3:functionName}() {}",
+      "  replace with {",
+      "    ${4:// new implementation}",
+      "  }",
+      "  why: \"${5:reason}\"",
+      "}"
+    ],
+    "description": "Patch a specific function in a file"
+  },
+  "Fix Pattern": {
+    "prefix": "fix",
+    "body": [
+      "fix ${1:fixName} {",
+      "  pattern: { ${2:old pattern} }",
+      "  replace: { ${3:new pattern} }",
+      "  scope:   \"${4:**/*.ts}\"",
+      "  severity: ${5:bug}",
+      "  note:    \"${6:explanation}\"",
+      "}"
+    ],
+    "description": "Define a reusable code fix pattern"
+  },
+  "Intent Block": {
+    "prefix": "intent",
+    "body": [
+      "intent \"${1:description}\" {",
+      "  scope:    \"${2:src/**}\"",
+      "  language: ${3:TypeScript}",
+      "  inject:   { ${4:// code to inject} }",
+      "  where:    ${5:function_entry}",
+      "}"
+    ],
+    "description": "Inject code at function boundaries"
+  },
+  "Migrate Block": {
+    "prefix": "migrate",
+    "body": [
+      "migrate \"${1:lib v1 -> v2}\" in ${2:TypeScript} {",
+      "  rename: ${3:oldFn} -> ${4:newFn}",
+      "  scope:  \"${5:**/*.ts}\"",
+      "}"
+    ],
+    "description": "Migrate code from one API to another"
+  },
+  "Guard Block": {
+    "prefix": "guard",
+    "body": [
+      "guard \"${1:label}\" {",
+      "  scope:   \"${2:src/**}\"",
+      "  assert:  fn ${3:functionName}() exists",
+      "  on_fail: ${4:block_apply}",
+      "}"
+    ],
+    "description": "Add a guard assertion before applying transforms"
+  },
+  "Trace Block": {
+    "prefix": "trace",
+    "body": [
+      "trace ${1:variableName} in \"${2:src/}\" {",
+      "  language: ${3:TypeScript}",
+      "  origin:   ${4:req.body.field}",
+      "  follow:   assignments, function_calls, returns",
+      "  report:   full_chain",
+      "  flag:     \"${5:any path that reaches console.log}\"",
+      "}"
+    ],
+    "description": "Trace data flow through your codebase"
+  },
+  "Apply Fix": {
+    "prefix": "apply",
+    "body": ["apply fix ${1:fixName} to ${2:project}"],
+    "description": "Apply a named fix to project, file, or directory"
+  },
+  "Apply with Preview": {
+    "prefix": "applyp",
+    "body": ["apply fix ${1:fixName} to project preview"],
+    "description": "Preview a fix without writing to disk"
+  }
+}
